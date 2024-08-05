@@ -6,6 +6,7 @@ public class Character_movement_script : MonoBehaviour
 {
     public Rigidbody2D body;
     public float speed;
+   
     void Start()
     {
         
@@ -17,9 +18,17 @@ public class Character_movement_script : MonoBehaviour
         float xinput = Input.GetAxis("Horizontal");
         float yinput = Input.GetAxis("Vertical");
         
-        Vector2 direction = new Vector2(xinput, yinput);
+        
 
-        body.velocity = direction * speed;
+        if(Mathf.Abs(xinput) > 0)
+        {
+            body.velocity = new Vector2(xinput * speed, body.velocity.y);
+        }
+
+       if(Mathf.Abs(yinput) > 0)
+        {
+            body.velocity = new Vector2(body.velocity.x, yinput * speed);
+        }
 
 
 
